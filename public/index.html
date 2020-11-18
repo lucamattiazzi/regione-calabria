@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ciaone!</title>
-    <style>
-      body {
-        background-color: #1809a2;
-        animation: filter-animation 4s infinite;
-      }
-      @keyframes filter-animation {
-        0% {
-          filter: hue-rotate(0deg);
-        }
-        50% {
-          filter: hue-rotate(360deg);
-        }
-        100% {
-          filter: hue-rotate(0deg);
-        }
-      }
-    </style>
+    <title>Scegli tu!</title>
+    <style></style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <div>CIAO! SONO LUCA</div>
+    <form id="form" class="w-50 pt-5 m-auto">
+      <div class="form-group">
+        <label for="emailInput"
+          >Email di chi vuoi diventi il prossimo Commissariə della Regione Calabria</label
+        >
+        <input
+          type="email"
+          id="emailInput"
+          class="form-control"
+          aria-describedby="emailHelp"
+          placeholder="domenico.arcuri@senatogalattico.sw"
+        />
+        <small id="emailHelp" class="form-text text-muted"
+          >Non ti preoccupare, la mail non verrà usata se non per inviare questo invito</small
+        >
+      </div>
+      <div class="form-group">
+        <label for="firstNameInput">Nome</label>
+        <input type="text" class="form-control" id="firstNameInput" placeholder="Tizio" />
+      </div>
+      <div class="form-group">
+        <label for="lastNameInput">Cognome</label>
+        <input type="text" class="form-control" id="lastNameInput" placeholder="Caio" />
+      </div>
+      <div class="form-group">
+        <label for="messageInput">Un messaggio di augurio personale</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="messageInput"
+          placeholder="Dai, ho fiducia in te!"
+        ></textarea>
+      </div>
+      <button type="submit" id="submit" class="btn btn-primary">Invia!</button>
+    </form>
+
+    <script src="/invita.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
