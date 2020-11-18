@@ -40,7 +40,7 @@ app.post('/invite', (req, res) => {
     const email = hashKey(req.body.email)
     saveUser({ email, firstName, lastName, uuid, message }).then((error) => {
       if (error) return res.json({ success: false, error: error })
-      res.json({ success: true }).end()
+      res.json({ success: true, uuid }).end()
       return sendMail({ email: req.body.email, firstName, lastName, uuid, message })
     })
   } catch (err) {
