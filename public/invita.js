@@ -4,7 +4,7 @@ const form = document.getElementById('form')
 const emailInput = document.getElementById('emailInput')
 const firstNameInput = document.getElementById('firstNameInput')
 const lastNameInput = document.getElementById('lastNameInput')
-const messageInput = document.getElementById('lastNameInput')
+const messageInput = document.getElementById('messageInput')
 const submit = document.getElementById('submit')
 
 function main() {
@@ -25,7 +25,9 @@ function main() {
         },
       })
       .then((res) => res.json())
-      .then(console.log)
+      .then((res) => {
+        return res.success ? window.alert('Grazie! Email inviata!') : window.alert(res.error)
+      })
   }
 }
 

@@ -1,8 +1,13 @@
 import { reject } from 'lodash'
 import redis from 'redis'
 import { UserData } from './types'
+import { config } from 'dotenv'
 
-const client = redis.createClient()
+config()
+
+const client = redis.createClient({
+  host: process.env.REDIS || 'localhost',
+})
 
 function promiseSet(key: string, value: string): Promise<any> {
   return new Promise<any>((resolve) => {
