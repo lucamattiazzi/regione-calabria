@@ -1,6 +1,4 @@
 frontend
 node_modules
-docker-compose.yml
-Dockerfile
 yarn.lock
 .env
