@@ -3,16 +3,16 @@ import mailgun from 'mailgun-js'
 import { UserData } from './types'
 import { capitalize } from 'lodash'
 import { config } from 'dotenv'
+import got from 'got'
 
 config()
 
-const DOMAIN = process.env.MAILGUN_DOMAIN
-const mg = mailgun({ apiKey: process.env.MAILGUN_TOKEN, domain: DOMAIN })
+const mg = mailgun({ apiKey: process.env.MAILGUN_TOKEN, domain: process.env.MAILGUN_DOMAIN })
 
 // sgMail.setApiKey(process.env.SENDGRID_TOKEN)
 
 export function sendMail(userData: UserData) {
-  const msg = {
+  const body = {
     to: userData.email,
     from: 'ViceCommissario Sanità Regione Calabria<sanita@regionecalabria.itaila.it>',
     subject: 'Nomina al ruolo di commissariə Sanità Regione Calabria',
@@ -32,10 +32,15 @@ export function sendMail(userData: UserData) {
       </p>
       `,
   }
-  mg.messages().send(msg, (error, body) => {
-    if (error) return console.error(error)
-    console.log(body)
-  })
+
+  // got.post(process.env.MAILGUN_DOMAIN, {
+  //   headers: {
+  //     Authorization: 'Basic ' + Buffer.from(`'api:${process.env.MAILGUN_TOKEN}`).toString('base64'),
+  //   },
+  //   body,
+  // })
+
+  mg.messages().send(body).then(console.log)
 }
 
 sendMail({
@@ -44,3 +49,14 @@ sendMail({
   lastName: 'mattiazzi',
   message: 'stocazzo',
 })
+
+// const data = {
+//   from: 'Excited User <me@samples.mailgun.org>',
+//   to: 'tanke88@gmail.com',
+//   subject: 'Hello',
+//   text: 'Testing some Mailgun awesomness!',
+// }
+// mg.messages().send(data, function (error, body) {
+//   console.log(error)
+//   console.log(body)
+// })
