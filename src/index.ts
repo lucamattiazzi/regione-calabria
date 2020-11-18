@@ -1,3 +1,4 @@
+import * as crypto from 'crypto'
 import bodyParser from 'body-parser'
 import express from 'express'
 import cors from 'cors'
@@ -14,6 +15,11 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
+function hashKey(key: string): string {
+  const hashed = crypto.createHash('md5').update(key).digest('hex')
+  return hashed
+}
+
 function validateBody(body: Omit<UserData, 'uuid'>): void {
   const { email, firstName, lastName, message } = body
   if (!email) throw new Error('Email mancante')
@@ -29,12 +35,13 @@ function validateBody(body: Omit<UserData, 'uuid'>): void {
 app.post('/invite', (req, res) => {
   try {
     validateBody(req.body)
-    const { email, firstName, lastName, message } = req.body
+    const { firstName, lastName, message } = req.body
     const uuid = v4()
+    const email = hashKey(req.body.email)
     saveUser({ email, firstName, lastName, uuid, message }).then((error) => {
       if (error) return res.json({ success: false, error: error })
       res.json({ success: true }).end()
-      return sendMail({ email, firstName, lastName, uuid, message })
+      return sendMail({ email: req.body.email, firstName, lastName, uuid, message })
     })
   } catch (err) {
     res.json({ success: false, error: err.message })
